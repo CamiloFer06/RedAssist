@@ -115,7 +115,7 @@ def createNewEntry(master):
     # coomboBoxes
     date = datetime.now()
 
-    years = [str(year) for year in range(2000, date.year+1)]
+    years = [str(year) for year in range(2000, date.year+2)]
     months = list(calendar.month_name)
     months.pop(0)
     days = [str(day) for day in range(calendar.monthrange(date.year, date.month)[1]+1)]
@@ -295,9 +295,11 @@ def createPost():
             lastDate = date2
             for i in range(int((date2 - date1).days) + 1):
                 date = date1 + timedelta(i)
-
+                
                 entry['spent_on'] = date
                 response = timeEntryPost(entry)
+                if date.weekday() > 4:
+                    continue
                 if response != 201:
                     succes = False
                     lastDate = date

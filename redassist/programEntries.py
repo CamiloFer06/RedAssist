@@ -41,6 +41,7 @@ def createJob(entry, days, hr, min):
     
 def removeProgEntry(id):
     global dir, config, totCount
+    config.read(f"{dir}/.data/.data.cfg")
     for i in range(id, totCount):
         config['ProgramedEntries'][f'redassist-{i}'] = config['ProgramedEntries'][f'redassist-{i+1}']
         config['ProgramedEntries'][f'redassist-{i}_Active'] = config['ProgramedEntries'][f'redassist-{i+1}_Active']
@@ -65,6 +66,7 @@ def removeProgEntry(id):
 
 def updateProgEntry(id ,entry, min,  hr, days):
     global dir, config
+    config.read(f"{dir}/.data/.data.cfg")
     entry['minute'] = min
     entry['hrs'] = hr
     entry['days'] = days
@@ -90,7 +92,7 @@ def removeAll():
 
 def unableEntry(id):
     global dir, config
-
+    config.read(f"{dir}/.data/.data.cfg")
     config['ProgramedEntries'][f'redassist-{id}_Active'] = '0'
     with open(f'{dir}/.data/.data.cfg', "w") as cfgfile:
             config.write(cfgfile)
@@ -103,7 +105,7 @@ def unableEntry(id):
 
 def enableEntry(id):
     global dir, config
-
+    config.read(f"{dir}/.data/.data.cfg")
     config['ProgramedEntries'][f'redassist-{id}_Active'] = '1'
     with open(f'{dir}/.data/.data.cfg', "w") as cfgfile:
             config.write(cfgfile)
@@ -116,6 +118,7 @@ def enableEntry(id):
 
 def progRemind():
     global dir, config
+    config.read(f"{dir}/.data/.data.cfg")
     cron = CronTab(user=True)
     job = cron.new(command=f'XDG_RUNTIME_DIR=/run/user/$(id -u) {dir}/reminder', comment='redassist-rermider')
     job.setall('@reboot')
