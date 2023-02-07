@@ -126,7 +126,7 @@ def delCert():
         data.write(cfgfile)
     logOut()
 
-opredBtn = CTkButton(configFrame, text="Abrir horas", command=lambda: webbrowser.open('https://redmine.netlabs.com.uy'))
+opredBtn = CTkButton(configFrame, text="Abrir Redmine", command=lambda: webbrowser.open('https://redmine.netlabs.com.uy'))
 opredBtn.configure(font=("", 20, "bold"))
 opredBtn.grid(row=0, column=0, padx=10, pady=10, sticky='w')
 
