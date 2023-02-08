@@ -76,7 +76,8 @@ def timeEntryPost(entry):
 </time_entry>"""
     timePost = post(url, cert=cert, verify=verify, data=data, headers=headers)
     
-    
+    print(timePost.status_code)
+    print(timePost.content)
     return timePost.status_code
 
 
